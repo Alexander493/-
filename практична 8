@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <string.h>
+
+unsigned long long factorial(int n) {
+    if (n == 0 || n == 1)
+        return 1;
+    return n * factorial(n - 1);
+}
+
+int main() {
+    char word[15];
+    printf("Введіть слово: ");
+    scanf("%s", word);
+
+    int length = strlen(word);
+    unsigned long long total_permutations = factorial(length);
+
+    int char_count[256] = {0};
+    for (int i = 0; i < length; i++) {
+        char_count[(int)word[i]]++;
+    }
+
+    unsigned long long divisor = 1;
+    for (int i = 0; i < 256; i++) {
+        if (char_count[i] > 1) {
+            divisor *= factorial(char_count[i]);
+        }
+    }
+
+    unsigned long long anagrams = total_permutations / divisor;
+
+    printf("Кількість анаграм: %llu\n", anagrams);
+
+    return 0;
+}
