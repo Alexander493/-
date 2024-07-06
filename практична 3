@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    int p;
+    printf("Введіть значення p: ");
+    scanf("%d", &p);
+
+    if (p <= 0) {
+        printf("Кількість розрядів повинна бути більше 0\n");
+        return 1;
+    }
+
+    long long totalNumbers = (long long)pow(2, p);
+
+    long long invalidNumbers = p - 2;
+
+    long long validNumbers = totalNumbers - invalidNumbers;
+
+    printf("Кількість чисел із %d розрядів: %lld\n", p, validNumbers);
+
+    return 0;
+}
