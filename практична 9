@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <math.h>
+
+int minSteps(int x, int y) {
+    if (x == y) return 0;
+
+    int distance = y - x;
+    int step = 1, steps = 0, position = x;
+
+    while (position < y) {
+        steps++;
+        position += step;
+        if (position >= y) break;
+        step++;
+        if (position + step > y) step--;
+    }
+
+    return steps;
+}
+
+int main() {
+    int x, y;
+
+    printf("Enter x: ");
+    scanf("%d", &x);
+    printf("Enter y: ");
+    scanf("%d", &y);
+
+    if (x < 0 || y >= 2147483648 || x > y) {
+        printf("Invalid input. Please ensure 0 <= x <= y < 2^31.\n");
+        return 1;
+    }
+
+    int result = minSteps(x, y);
+    printf("Minimum number of steps from %d to %d is: %d\n", x, y, result);
+
+    return 0;
+}
